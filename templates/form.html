@@ -6,22 +6,30 @@
         br {margin-bottom: 20px;}
     </style>
 
-    <form method='POST'>
+    <h1>Signup</h1>
+
+    <form action="/submitted" method="POST">
 
         <label>Username:
-            <input name="user-name" type="text" /> 
+            <input name="username" type="text" /> 
         </label>
 
         <br>
 
         <label>Password:
-            <input name="user-password" type="password" />
+            <input name="userpassword" type="password" />
         </label>
         
         <br>
+
+        <label>Verify Password:
+            <input name="userpassword" type="password" />
+        </label>
         
+        <br>
+
         <label>Email:
-            <input name="user-email" type="email" />
+            <input name="useremail" type="email" />
         </label>
            
         <br>
