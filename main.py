@@ -18,11 +18,14 @@ def index():
     return template.render()
 
 
+
 @app.route("/submitted" , methods=["POST"])
 def submitted():
     username = request.form["username"]
     template = jinja_env.get_template('welcome_greeting.html')
     return template.render(username =
     username)
+
+#return redirect('/submitted?username={0}'.format(username))
 
 app.run()   

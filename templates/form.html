@@ -1,37 +1,36 @@
 <!doctype html>
 <html>
+<head>
+        <style>
+                br {margin-bottom: 20px;}
+                .error { color: red; }
+            </style>
+</head>    
 <body>
-
-    <style>
-        br {margin-bottom: 20px;}
-    </style>
 
     <h1>Signup</h1>
 
     <form action="/submitted" method="POST">
 
         <label>Username:
-            <input name="username" type="text" /> 
+            <input name="username" type="text" value='{{username}}' min="3" max="20"required/> <span class="error">{{username_error}}</span> 
         </label>
 
         <br>
 
         <label>Password:
-            <input name="userpassword" type="password" />
+            <input name="userpassword" type="password" value='{{userpassword}}' min="3" max="20" required/> <span class="error">{{password_error}}</span>
         </label>
-        
         <br>
 
         <label>Verify Password:
-            <input name="userpassword" type="password" />
+            <input name="v_userpassword" type="password" value='{{v_userpassword}}' min="3" max="20" required/> <span class="error">{{nomatch_error}}</span>
         </label>
-        
         <br>
 
         <label>Email:
-            <input name="useremail" type="email" />
+            <input name="useremail" type="text" value='{{useremail}}' required/><span class="error">{{email_error}}</span>
         </label>
-           
         <br>
 
         <input type="submit" />
