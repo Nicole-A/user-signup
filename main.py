@@ -15,10 +15,12 @@ def analyze_text():
     username = request.form['username']
     password = request.form['password']
     ver_password = request.form['ver_password']
+    email =  request.form['email']
 
     username_error = ''
     password_error = ''
     notmatch_error = ''
+    email_error = ''
 
     if len(username) < 3 or len(username) > 20 or ' ' in username:
         username_error = 'Not a valid username'
@@ -30,11 +32,17 @@ def analyze_text():
     if  ver_password != password:
         notmatch_error = 'Passwords must match'
 
-    if not username_error or not password_error or not notmatch_error:
-        return redirect('/welcome?username={}'.format(username))
+    if email != '' and len(email) < 3 or email != '' and len(email) > 20 or email != '' and "@" and "." not in email:
+        email_error = "That's not a valid email"
+        email = ''
 
+
+    if username_error or password_error or notmatch_error or email_error:
+        return render_template('form.html', username_error=username_error, password_error=password_error, 
+        notmatch_error=notmatch_error, email_error=email_error, username=username, email=email)
+        
     else:
-        return render_template('form.html', username_error=username_error, password_error=password_error, notmatch_error=notmatch_error,username=username)
+        return redirect('/welcome?username={}'.format(username))
 
 @app.route("/welcome" , methods=['GET','POST'] )
 def welcome_message():
