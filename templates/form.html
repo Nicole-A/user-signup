@@ -10,26 +10,26 @@
 
     <h1>Signup</h1>
 
-    <form action="/submitted" method="POST">
+    <form action="/validate" method="post">
 
         <label>Username:
-            <input name="username" type="text" value='{{username}}' min="3" max="20"required/> <span class="error">{{username_error}}</span> 
+            <input name="username" type="text" value='{{username}}' /> <span class="error">{{username_error}}</span> 
         </label>
 
         <br>
 
         <label>Password:
-            <input name="userpassword" type="password" value='{{userpassword}}' min="3" max="20" required/> <span class="error">{{password_error}}</span>
+            <input name="password" type="password" value='{{password}}' /> <span class="error">{{password_error}}</span>
         </label>
         <br>
 
         <label>Verify Password:
-            <input name="v_userpassword" type="password" value='{{v_userpassword}}' min="3" max="20" required/> <span class="error">{{nomatch_error}}</span>
+            <input name="ver_password" type="password" value='{{ver_password}}' /> <span class="error">{{nomatch_error}}</span>
         </label>
         <br>
 
         <label>Email:
-            <input name="useremail" type="text" value='{{useremail}}' required/><span class="error">{{email_error}}</span>
+            <input name="useremail" type="text" value='{{useremail}}' /><span class="error">{{email_error}}</span>
         </label>
         <br>
 

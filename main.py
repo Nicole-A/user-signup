@@ -1,31 +1,46 @@
-from flask import Flask, request, redirect
+from flask import Flask, request, redirect, render_template
 import cgi
 import os
-import jinja2
-
-template_dir = os.path.join(os.path.dirname(__file__),
-    'templates')
-jinja_env = jinja2.Environment(
-    loader = jinja2.FileSystemLoader(template_dir), autoescape=True)    
-
+   
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
 
 @app.route("/")
 def index():
-    template = jinja_env.get_template('form.html')
-    return template.render()
+   return render_template('form.html')
 
+@app.route("/validate", methods=['POST'])
+def analyze_text():
+    username = request.form['username']
+    password = request.form['password']
+    ver_password = request.form['ver_password']
 
+    username_error = ''
+    password_error = ''
+    notmatch_error = ''
 
-@app.route("/submitted" , methods=["POST"])
-def submitted():
-    username = request.form["username"]
-    template = jinja_env.get_template('welcome_greeting.html')
-    return template.render(username =
+    if len(username) < 3 or len(username) > 20 or ' ' in username:
+        username_error = 'Not a valid username'
+        username = ''
+    
+    if len(password) < 3 or len(password) > 20 or ' ' in password:
+        password_error = 'Not a valid password'
+
+    if  ver_password != password:
+        notmatch_error = 'Passwords must match'
+
+    if not username_error or not password_error or not notmatch_error:
+        return redirect('/welcome?username={}'.format(username))
+
+    else:
+        return render_template('form.html', username_error=username_error, password_error=password_error, notmatch_error=notmatch_error,username=username)
+
+@app.route("/welcome" , methods=['GET','POST'] )
+def welcome_message():
+    username = request.args.get('username')
+    return render_template('welcome_greeting.html', username =
     username)
 
-#return redirect('/submitted?username={0}'.format(username))
 
 app.run()   
